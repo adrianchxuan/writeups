@@ -1,0 +1,18 @@
+{
+  "titleId": "PPSA99026",
+  "contentId": "IV0000-PPSA99026_00-FLAGCHECKER",
+  "applicationCategoryType": 0,
+  "applicationDrmType": "free",
+  "ageLevel": { "default": 0 },
+  "contentVersion": "01.00",
+  "localizedParameters": {
+    "defaultLanguage": "en-US",
+    "en-US": { "titleName": "Flag Checker VI" }
+  },
+  "masterVersion": "01.00",
+  "requiredSystemSoftwareVersion": "0x0000000000000000",
+  "userDefinedParam1": 0,
+  "userDefinedParam2": 0,
+  "userDefinedParam3": 0,
+  "userDefinedParam4": 0
+}
