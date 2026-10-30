@@ -1,0 +1,74 @@
+:root {
+  --page: #0a1720;
+  --panel: #12232e;
+  --panel-raised: #1a303c;
+  --accent: #69e4e7;
+  --text: #f4f8fa;
+  --muted: #a6bbc4;
+  --border: rgba(151, 220, 228, 0.17);
+  --error: #ff9caa;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  background: transparent;
+}
+
+body::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(5, 14, 21, 0.86), rgba(6, 18, 27, 0.92)),
+    url('/assets/Ado-bg.svg') center / cover no-repeat;
+  content: '';
+  pointer-events: none;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border: 2px solid rgba(105, 228, 231, 0.7);
+  border-radius: 50%;
+  background: var(--panel);
+  object-fit: cover;
+  object-position: center 28%;
+  box-shadow: 0 0 22px rgba(105, 228, 231, 0.16);
+}
+
+.hero::after {
+  border-color: rgba(105, 228, 231, 0.2);
+  box-shadow:
+    0 0 0 36px rgba(105, 228, 231, 0.035),
+    0 0 0 72px rgba(105, 228, 231, 0.025);
+}
+
+.avatar {
+  border-color: rgba(105, 228, 231, 0.32);
+  background: rgba(105, 228, 231, 0.11);
+}
+
+.hero-cta:hover {
+  background: #9bf3f2;
+}
+
+.resource-link:hover,
+.tile:hover {
+  border-color: rgba(105, 228, 231, 0.48);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(105, 228, 231, 0.15);
+}
+
+button {
+  background: var(--accent);
+}
+
+button:hover:not(:disabled) {
+  background: #9bf3f2;
+}

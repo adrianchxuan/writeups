@@ -1,0 +1,56 @@
+{
+  "name": "Ado",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@adonisjs/bodyparser": "file:./bodyparser-10.1.1",
+    "@adonisjs/core": "^5.9.0",
+    "@adonisjs/session": "^6.4.0",
+    "@adonisjs/view": "^6.2.0",
+    "proxy-addr": "^2.0.7",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^5.9.5",
+    "@types/node": "^18.0.0",
+    "adonis-preset-ts": "^2.1.0",
+    "pino-pretty": "^13.2.0",
+    "typescript": "~4.6"
+  },
+  "scripts": {
+    "dev": "node ace serve --watch",
+    "build": "node ace build --production",
+    "start": "node server.js",
+    "test": "node ace test",
+    "lint": "eslint . --ext=.ts",
+    "format": "prettier --write ."
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:adonis/typescriptApp",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error"
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "build"
+  ],
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "printWidth": 100
+  }
+}

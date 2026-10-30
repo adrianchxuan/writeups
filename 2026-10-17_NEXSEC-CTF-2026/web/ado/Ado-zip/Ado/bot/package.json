@@ -1,0 +1,13 @@
+{
+  "name": "admin-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Headless browser bot that logs in as admin and periodically visits the comment moderation page, triggering any stored XSS payloads -- this is what makes stage 2 (XSS cookie theft) actually work.",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "puppeteer": "^22.0.0"
+  }
+}

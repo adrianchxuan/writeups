@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101522">
+  <title>Ado | Make it happen</title>
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #101522;
+      --panel: #171e2d;
+      --panel-raised: #1c2638;
+      --accent: #a7f36b;
+      --text: #f4f7fb;
+      --muted: #a5afbf;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--page);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 28px;
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(95, 126, 72, 0.2), transparent 38%),
+        var(--page);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1040px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0 34px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--accent);
+      color: var(--page);
+      font-size: 1.1rem;
+    }
+
+    .top-link {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 160ms ease;
+    }
+
+    .top-link:hover,
+    .resource-link:hover {
+      color: var(--accent);
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 26px;
+      padding: 13px 18px;
+      border-radius: 11px;
+      background: var(--accent);
+      color: var(--page);
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      background: #b9ff83;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(32px, 7vw, 76px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(130deg, rgba(28, 38, 56, 0.98), rgba(20, 28, 42, 0.95));
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.24);
+    }
+
+    .hero::after {
+      position: absolute;
+      top: -100px;
+      right: -85px;
+      width: 330px;
+      height: 330px;
+      border: 1px solid rgba(167, 243, 107, 0.15);
+      border-radius: 50%;
+      box-shadow: 0 0 0 36px rgba(167, 243, 107, 0.025), 0 0 0 72px rgba(167, 243, 107, 0.02);
+      content: '';
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 690px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .status::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(167, 243, 107, 0.7);
+      content: '';
+    }
+
+    h1 {
+      max-width: 650px;
+      margin: 22px 0 16px;
+      font-size: clamp(3rem, 8vw, 6.3rem);
+      line-height: 0.98;
+      letter-spacing: -0.075em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .intro {
+      max-width: 510px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.7;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(23, 30, 45, 0.88);
+    }
+
+    .card-label {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .music-card {
+      background: linear-gradient(145deg, #1c2638, #171e2d);
+    }
+
+    .music-player {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #090c12;
+    }
+
+    .music-player iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .resource-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .resource-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 15px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel-raised);
+      font-size: 0.93rem;
+      font-weight: 600;
+      transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .resource-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(167, 243, 107, 0.45);
+    }
+
+    .arrow {
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 2px 4px;
+      color: #788397;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 18px;
+      }
+
+      .topbar {
+        padding-bottom: 22px;
+      }
+
+      .hero {
+        border-radius: 22px;
+      }
+
+      .hero::after {
+        right: -210px;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      body {
+        padding: 12px;
+      }
+
+      .top-link {
+        font-size: 0.8rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="/css/ado-theme.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Ado home">
+        <img class="brand-mark" src="/assets/Ado.jpg" alt="Ado">
+        <span>ado</span>
+      </a>
+      <a class="top-link" href="/login">Become an Ado fan? Login <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="welcome-title">
+        <div class="hero-content">
+          <span>Welcome to Ado lover</span>
+          <h1 id="welcome-title">Make room<br>for <span>what's next.</span></h1>
+          <p class="intro">
+            A fresh start, a blank canvas, and a song to set the pace. Enjoy the song
+          </p>
+          <a class="hero-cta" href="/login">Become an Ado fan? Login <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <section class="card music-card" aria-labelledby="music-title">
+          <p class="card-label">Press play</p>
+          <h2 id="music-title">A little soundtrack for the journey</h2>
+          <div class="music-player">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/__qvPGatwus"
+              title="YouTube music player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="resources-title">
+          <p class="card-label">Take the next step</p>
+          <h2 id="resources-title">Find Ado online</h2>
+          <nav class="resource-list" aria-label="Ado social links">
+            <a class="resource-link" href="https://www.instagram.com/ado_staff_official/?hl=en" target="_blank" rel="noopener noreferrer">
+              <span>Follow Ado on Instagram</span><span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="resource-link" href="https://youtu.be/__qvPGatwus?si=KUc173Vz4yrlNyC9" target="_blank" rel="noopener noreferrer">
+              <span>Listen on YouTube</span><span class="arrow" aria-hidden="true">↗</span>
+            </a>
+          </nav>
+        </section>
+      </div>
+
+    </main>
+
+    <footer>
+      <span>Made for Ado fans</span>
+    </footer>
+  </div>
+</body>
+</html>

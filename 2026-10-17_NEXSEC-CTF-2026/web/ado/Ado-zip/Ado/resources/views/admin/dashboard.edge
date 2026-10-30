@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a1720">
+  <title>Admin | Ado fans</title>
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #101522;
+      --panel: #171e2d;
+      --panel-raised: #1c2638;
+      --accent: #a7f36b;
+      --text: #f4f7fb;
+      --muted: #a5afbf;
+      --border: rgba(255, 255, 255, 0.1);
+      --error: #ff9c9c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 28px;
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(95, 126, 72, 0.2), transparent 38%),
+        var(--page);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0 42px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark {
+      display: block;
+      width: 42px;
+      height: 42px;
+      object-fit: cover;
+    }
+
+    .top-link {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: border-color 160ms ease, color 160ms ease;
+    }
+
+    .top-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .eyebrow,
+    .card-label {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 7vw, 3.6rem);
+      letter-spacing: -0.07em;
+    }
+
+    .subtitle {
+      margin: 9px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .session-badge {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 14px;
+      border: 1px solid rgba(105, 228, 231, 0.22);
+      border-radius: 999px;
+      background: rgba(105, 228, 231, 0.08);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .session-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(105, 228, 231, 0.75);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      display: flex;
+      min-height: 310px;
+      min-width: 0;
+      flex-direction: column;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(20, 34, 48, 0.96), rgba(13, 26, 39, 0.96));
+      box-shadow: 0 22px 58px rgba(0, 0, 0, 0.2);
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(105, 228, 231, 0.38);
+    }
+
+    .card-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 26px;
+    }
+
+    .card-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border: 1px solid rgba(105, 228, 231, 0.22);
+      border-radius: 15px;
+      background: rgba(105, 228, 231, 0.1);
+      color: var(--accent);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .card-index {
+      color: rgba(166, 187, 196, 0.58);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+      letter-spacing: -0.04em;
+    }
+
+    .card-description {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .tile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 48px;
+      padding: 13px 16px;
+      border: 1px solid rgba(105, 228, 231, 0.25);
+      border-radius: 12px;
+      background: rgba(105, 228, 231, 0.11);
+      color: var(--text);
+      font-weight: 600;
+      transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      background: rgba(105, 228, 231, 0.18);
+    }
+
+    .arrow {
+      color: var(--accent);
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px dashed rgba(105, 228, 231, 0.32);
+      border-radius: 12px;
+      background: rgba(5, 17, 26, 0.62);
+      color: var(--muted);
+      font: 0.85rem 'DM Sans', sans-serif;
+    }
+
+    input[type="file"]::file-selector-button {
+      margin-right: 10px;
+      padding: 8px 11px;
+      border: 0;
+      border-radius: 8px;
+      background: rgba(105, 228, 231, 0.16);
+      color: var(--text);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 600;
+    }
+
+    button {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--page);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      transition: transform 160ms ease, filter 160ms ease;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.65;
+    }
+
+    .feedback {
+      min-height: 1.5em;
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .feedback[data-state="error"] {
+      color: var(--error);
+    }
+
+    .feedback[data-state="success"] {
+      color: var(--accent);
+    }
+
+    .report-output {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--page);
+      color: var(--text);
+      font: 0.85rem/1.6 ui-monospace, monospace;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .page-note {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .report-output[hidden] {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 18px;
+      }
+
+      .topbar {
+        padding-bottom: 32px;
+      }
+
+      .heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card:last-child {
+        grid-column: auto;
+      }
+
+      .card {
+        min-height: 0;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="/css/ado-theme.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Ado home">
+        <img class="brand-mark" src="/assets/Ado.jpg" alt="Ado">
+        <span>ado</span>
+      </a>
+      <a class="top-link" href="/">View fan page <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <div class="heading">
+        <div>
+          <p class="eyebrow">Ado fan community / Control room</p>
+          <h1>Admin menu</h1>
+          <p class="subtitle">Choose a tool to manage the community.</p>
+        </div>
+        <span class="session-badge"><span class="session-dot" aria-hidden="true"></span>Admin session active</span>
+      </div>
+
+      <div class="grid">
+        <section class="card">
+          <div class="card-topline">
+            <span class="card-icon" aria-hidden="true">✎</span>
+            <span class="card-index">01 / COMMUNITY</span>
+          </div>
+          <p class="card-label">Community</p>
+          <h2>Comment moderation</h2>
+          <p class="card-description">Read and review the latest notes shared by Ado fans.</p>
+          <a class="tile" href="/admin/comments">
+            <span>Open moderation</span><span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </section>
+
+        <section class="card">
+          <div class="card-topline">
+            <span class="card-icon" aria-hidden="true">↑</span>
+            <span class="card-index">02 / FILES</span>
+          </div>
+          <p class="card-label">Admin tool</p>
+          <h2>Attachment upload</h2>
+          <p class="card-description">Choose a file from your device and submit it to the challenge.</p>
+          <form id="upload-form">
+            <input type="file" name="attachment" aria-label="Choose an attachment" required>
+            <button type="submit">Upload attachment <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="feedback" id="upload-feedback" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="card">
+          <div class="card-topline">
+            <span class="card-icon" aria-hidden="true">▤</span>
+            <span class="card-index">03 / REPORTS</span>
+          </div>
+          <p class="card-label">Reports</p>
+          <h2>Generate report</h2>
+          <p class="card-description">Create a summary of the current moderation status.</p>
+          <button id="report-button" type="button">Generate report <span aria-hidden="true">→</span></button>
+          <p class="feedback" id="report-feedback" role="status" aria-live="polite"></p>
+          <pre class="report-output" id="report-output" hidden></pre>
+        </section>
+      </div>
+      <p class="page-note">Use these tools only for the local challenge environment.</p>
+    </main>
+  </div>
+  <script>
+    const uploadForm = document.getElementById('upload-form')
+    const uploadFeedback = document.getElementById('upload-feedback')
+    const reportButton = document.getElementById('report-button')
+    const reportFeedback = document.getElementById('report-feedback')
+    const reportOutput = document.getElementById('report-output')
+
+    uploadForm.addEventListener('submit', async (event) => {
+      event.preventDefault()
+      const button = uploadForm.querySelector('button')
+      button.disabled = true
+      uploadFeedback.dataset.state = ''
+      uploadFeedback.textContent = 'Uploading attachment…'
+
+      try {
+        const response = await fetch('/admin/upload', {
+          method: 'POST',
+          body: new FormData(uploadForm),
+        })
+        const result = await response.json()
+        if (!response.ok) throw new Error(result.error || 'Upload failed.')
+        uploadFeedback.dataset.state = 'success'
+        uploadFeedback.textContent = `${result.message}: ${result.storedAs}`
+      } catch (error) {
+        uploadFeedback.dataset.state = 'error'
+        uploadFeedback.textContent = error.message || 'Unable to upload attachment.'
+      } finally {
+        button.disabled = false
+      }
+    })
+
+    reportButton.addEventListener('click', async () => {
+      reportButton.disabled = true
+      reportFeedback.dataset.state = ''
+      reportFeedback.textContent = 'Generating report…'
+      reportOutput.hidden = true
+
+      try {
+        const response = await fetch('/admin/generate-report')
+        const result = await response.json()
+        if (!response.ok) throw new Error(result.error || 'Report generation failed.')
+        reportFeedback.dataset.state = 'success'
+        reportFeedback.textContent = result.message
+        reportOutput.textContent = JSON.stringify(result.result, null, 2)
+        reportOutput.hidden = false
+      } catch (error) {
+        reportFeedback.dataset.state = 'error'
+        reportFeedback.textContent = error.message || 'Unable to generate report.'
+      } finally {
+        reportButton.disabled = false
+      }
+    })
+  </script>
+</body>
+</html>

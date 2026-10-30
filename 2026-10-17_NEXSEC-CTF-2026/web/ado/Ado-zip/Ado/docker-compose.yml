@@ -1,0 +1,50 @@
+services:
+  web:
+    build:
+      context: .
+      target: app
+    env_file:
+      - .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: "3333"
+      NODE_ENV: development
+    ports:
+      - "127.0.0.1:3333:3333"
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/node_modules/.cache:rw,noexec,nosuid,size=64m,uid=1000,gid=1000,mode=0770
+      - /app/storage:rw,noexec,nosuid,size=32m,uid=1000,gid=1000,mode=0770
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3333/').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+  admin-bot:
+    build:
+      context: .
+      target: admin-bot
+    env_file:
+      - .env
+    environment:
+      TARGET_URL: http://web:3333
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      INTERVAL_MS: ${BOT_INTERVAL_MS:-60000}
+    depends_on:
+      web:
+        condition: service_healthy
+    pids_limit: 256
+    restart: unless-stopped
